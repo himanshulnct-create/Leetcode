@@ -1,70 +1,29 @@
 class Solution {
     public String reverseWords(String s) {
-      int left = 0,
-          right = s.length()-1;
+        int i = s.length() - 1;
+        StringBuilder sb = new StringBuilder();
 
-     while (left<s.length()){
-        if(s.charAt(left)== ' '){
-            left++;
-        }else{
-            break;
-        }
-     } 
-     while (right>=0){
-        if(s.charAt(right)== ' '){
-            right--;
-        }else{
-            break;
-        }
-     }
-
-     StringBuilder sB = new StringBuilder();
-
-     while(left<=right){
-        if(s.charAt(left)!= ' '){
-            sB.append(s.charAt(left));
-            left++;
-        }else if(s.charAt(left)==' '){
-            if(sB.charAt(sB.length()-1)!= ' '){
-                sB.append(' ');
-                left++;
-            }else{
-                left++;
+        while (i >= 0){
+            while (i >= 0 && s.charAt(i)== ' ') {
+                i--;
             }
-        }
-     }
-     int i = 0; 
-     int j = sB.length() -1;
 
-     while(i<j){
-        char temp = sB.charAt(i);
-        sB.setCharAt(i, sB.charAt(j));
-        sB.setCharAt(j,temp);
-        i++;
-        j--;
-     }
-     int start = 0;
-     int end =0;
+            if (i<0) break;
 
-     while(start<sB.length()){
-        while(end<sB.length() && sB.charAt(end)!= ' '){
-            end++;
+            int end = i;
+
+            while (i >= 0 && s.charAt(i) != ' ') {
+                i--;
+            }
+
+            if (sb.length()>0) {
+                sb.append(" ");
+            }
+
+            String word = s.substring(i + 1, end + 1);
+            sb.append(word);
         }
 
-        int p1 = start,
-            p2 = end - 1;
-        
-        while(p1<p2){
-        char temp = sB.charAt(p1);
-        sB.setCharAt(p1, sB.charAt(p2));
-        sB.setCharAt(p2,temp);
-        p1++;
-        p2--;
-        }
-        start = end + 1;
-        end = start;
-
-     }
-     return sB.toString(); 
+        return sb.toString();
     }
 }
