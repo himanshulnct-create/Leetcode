@@ -1,20 +1,19 @@
 class Solution {
     public boolean containsNearbyDuplicate(int[] nums, int k) {
-        int i = 0;
         HashSet<Integer> set = new HashSet<>();
 
-        for (int j = 0;j <nums.length;j++) {
-
-            if (set.contains(nums[j])) {
+        for (int i = 0; i < nums.length; i++) {
+            // Remove the element that is now outside the window
+            if (i > k) {
+                set.remove(nums[i - k - 1]);
+            }
+            
+            // Try to add the current element. If it fails, a duplicate exists.
+            if (set.contains(nums[i])) {
                 return true;
             }
+            set.add(nums[i]);
 
-            set.add(nums[j]);
-
-            if (j - i + 1 > k) {
-                set.remove(nums[i]);
-                i++;
-            }
         }
 
         return false;
