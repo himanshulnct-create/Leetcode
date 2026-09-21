@@ -1,7 +1,7 @@
 class Solution {
     public boolean containsNearbyDuplicate(int[] nums, int k) {
         HashSet<Integer> set = new HashSet<>();
-
+        
         for (int i = 0; i < nums.length; i++) {
             // Remove the element that is now outside the window
             if (i > k) {
@@ -9,13 +9,11 @@ class Solution {
             }
             
             // Try to add the current element. If it fails, a duplicate exists.
-            if (set.contains(nums[i])) {
+            if (!set.add(nums[i])) {
                 return true;
             }
-            set.add(nums[i]);
-
         }
-
+        
         return false;
     }
 }
