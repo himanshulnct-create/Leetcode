@@ -2,13 +2,13 @@ class Solution {
     public List<String> findRepeatedDnaSequences(String s) {
         int L = 10;
         int n = s.length();
-        HashSet <String> set = new HashSet<>();
-        HashSet<String> res = new HashSet<>();
-        for(int right = 0;right<=(n-L);right++){
-            if(set.contains(s.substring(right,right+10))){
-                res.add(s.substring(right,right+10));
+        HashSet <String> seen = new HashSet<>();
+        HashSet<String> repeated = new HashSet<>();
+        for(int i = 0;i<=(n-L);i++){
+            String seq = s.substring(i, i + L);
+            if(!seen.add(seq)){
+                repeated.add(seq);
             }
-            set.add(s.substring(right,right+10));
         }
         ArrayList<String> list = new ArrayList<>(res);
         return list;
